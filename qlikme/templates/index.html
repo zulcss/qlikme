@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Demo!</title>
+    </head>
+    <body>
+        <form action="{{ url_for('index') }}" method="post">
+            {{ form.name.label }}
+            {{ form.name }}
+            <br>
+            {{ form.color.label }}
+            {{ form.color }}
+            <br>
+            {{ form.pet.label }}
+            {{ form.pet }}
+            <br>
+            {{ form.submit }}
+        </form>
+    </body>
+</html>

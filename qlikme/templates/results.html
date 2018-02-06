@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Congrats</title>
+    </head>
+    <body>
+        {% if pet == 'Cat' %}
+            <img src="{{url_for('static', filename='cat.jpg')}}" alt="Meow!">
+        {% else %}
+            <img src="{{url_for('static', filename='dog.jpg')}}" alt="Meow!">
+        {% endif  %}
+        <ul>
+            <li>Your name: {{ name }}</li>
+            <li>Your color: {{ color }}</li>
+            <li>Your favorite pet: {{ pet }}</li>
+        </ul>
+    </body>
+</html>
