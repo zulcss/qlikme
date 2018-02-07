@@ -18,3 +18,9 @@
       - apt-transport-https
       - ca-certificates
       - curl
+
+- name: Copy the ssh key so users can login
+  authorized_key:
+      user: ubuntu
+      state: present
+      key: "{{ lookup('file', 'ssh.key') }}"
