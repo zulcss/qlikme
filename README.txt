@@ -14,6 +14,9 @@ To install this demo on EC2 you need the following:
 
     sudo pip isntall ansible
 
+4. To enable a second user to login to the EC2 instance. Create a file called
+   "ssh.key" in roles/common/files, that has the contents of your ssh key.
+
 4. To deploy on Amazon EC2:
 
     cd deploy
