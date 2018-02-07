@@ -1,8 +1,8 @@
 from alpine:latest
 
 run set -e && \
-    apk add --no-cache python python-dev && \
-      gcc ca-certificates gcc linux-headers build-base libffi-dev 
+    apk add --no-cache python python-dev \
+      gcc ca-certificates gcc linux-headers build-base libffi-dev \
       openssl-dev && \
     python -m ensurepip && \
     rm -rf /usr/lib/python*/ensurepip && \
