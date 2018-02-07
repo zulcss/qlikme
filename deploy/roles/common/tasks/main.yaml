@@ -1,0 +1,20 @@
+---
+- name: Install python
+  raw: sudo apt-get install -y python-minimal
+
+- name: Make sure that we are up to date
+  become: true
+  apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 # One day
+
+- name: Make sure that we have the common tools we need.
+  apt:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - git
+      - apt-transport-https
+      - ca-certificates
+      - curl
