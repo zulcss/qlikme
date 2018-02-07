@@ -1,0 +1,45 @@
+---
+- name: Create a security group
+  ec2_group:
+      name: qlikme-sec-group
+      description: new sg for qlikme instances
+      region: "{{ region }}"
+      rules:
+       - proto: tcp
+         from_port: 22
+         to_port: 22
+         cidr_ip: 0.0.0.0/0
+       - proto: tcp
+         from_port: 5000
+         to_port: 5000
+         cidr_ip: 0.0.0.0/0
+       - proto: icmp
+         from_port: 8
+         to_port: -1
+         cidr_ip: 0.0.0.0/0
+  register: secgrp
+
+- name: Provision an instance
+  ec2:
+      key_name: "{{ sshkey }}"
+      instance_type: "{{ type }}"
+      group: qlikme-sec-group
+      region: "{{ region }}"
+      image: "{{ ami }}"
+      wait: true
+  register: ec2
+
+- name: Add new instance to host group
+  add_host:
+      hostname: "{{ item.public_ip }}"
+      groupname: web
+  with_items: "{{ ec2.instances }}"
+
+- name: Wait for SSH to come up
+  wait_for:
+      host: "{{ item.public_dns_name }}"
+      port: 22
+      delay: 60
+      timeout: 320
+      state: started
+  with_items: "{{ ec2.instances }}"

@@ -1,0 +1,5 @@
+---
+ami: ami-41e0b93b
+region: us-east-1
+type: t1.micro
+sshkey: chuck
